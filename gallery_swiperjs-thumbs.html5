@@ -1,0 +1,60 @@
+<?php
+$GLOBALS['TL_CSS'][] = 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css';
+?>
+
+
+
+<div class="swiper swiper-container gallery-top">
+    <div class="swiper-wrapper">
+        <?php foreach ($this->body as $class => $row): ?>
+            <?php foreach ($row as $col): ?>
+            <?php if ($col->addImage): ?>
+            <div class="swiper-slide <?= $class ?> <?= $col->class ?>">
+                <?php $this->insert('image', (array) $col); ?>
+            </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+      <?php endforeach; ?>
+    </div>
+    <div class="swiper-button-next swiper-button-white"></div>
+    <div class="swiper-button-prev swiper-button-white"></div>
+</div>
+<div class="swiper swiper-container gallery-thumbs">
+    <div class="swiper-wrapper">
+        <?php foreach ($this->body as $class => $row): ?>
+            <?php foreach ($row as $col): ?>
+            <?php if ($col->addImage): ?>
+            <div class="swiper-slide <?= $class ?> <?= $col->class ?>">
+                <?php $this->insert('image', (array) $col); ?>
+            </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+var galleryThumbs = new Swiper('.gallery-thumbs', {
+    spaceBetween: 10,
+    slidesPerView: 4,
+    loop: true,
+    freeMode: true,
+    loopedSlides: 5, //looped slides should be the same
+    watchSlidesVisibility: true,
+    watchSlidesProgress: true,
+});
+var galleryTop = new Swiper('.gallery-top', {
+    spaceBetween: 10,
+    loop: true,
+    loopedSlides: 5, //looped slides should be the same
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    thumbs: {
+      swiper: galleryThumbs,
+    },
+ });
+</script>
